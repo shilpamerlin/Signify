@@ -7,14 +7,12 @@
 
 import SwiftUI
 
-struct SignUpView: View {
+struct RegistrationView: View {
     var body: some View {
-        ZStack {
-            Color.black
-        }
+        Image("")
     }
 }
 
 #Preview {
-    SignUpView()
+    RegistrationView()
 }

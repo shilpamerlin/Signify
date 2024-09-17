@@ -1,18 +1,18 @@
 //
-//  InputView.swift
+//  SettingRowView.swift
 //  Signify
 //
-//  Created by Shilpa Joy on 2024-09-12.
+//  Created by Shilpa Joy on 2024-09-16.
 //
 
 import SwiftUI
 
-struct InputView: View {
+struct SettingRowView: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
 #Preview {
-    InputView()
+    SettingRowView()
 }
