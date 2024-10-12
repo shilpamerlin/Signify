@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import UIKit
 
 struct Signature: Identifiable {
-    let id = UUID()
-    let template: Template
-    let userDetails: UserDetails
+    var id:String
+    var template: Template
+    var userDetails: UserDetails
 }
+

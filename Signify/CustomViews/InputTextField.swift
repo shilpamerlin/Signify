@@ -15,14 +15,14 @@ struct InputTextField: View {
    
             
             TextField(title, text: $text)
-                .foregroundColor(.white)
+                //.accentColor(.white)
                 .textFieldStyle(PlainTextFieldStyle())
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
-        
+               
     }
 }
 
 #Preview {
-    InputTextField(text: .constant(""), title: "Email Address", placeholder: "name@example.com")
+    InputTextField(text: .constant(""), title: "Email Address")
 }

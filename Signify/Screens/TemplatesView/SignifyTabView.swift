@@ -8,21 +8,41 @@
 import SwiftUI
 
 struct SignifyTabView: View {
+    @State private var refreshData = false
+    @State private var selectedTab: Int = 0
+    @State private var homeNavigationPath = NavigationPath()
+    
     var body: some View {
-        TabView {
+        TabView(selection: $selectedTab) {
+            NavigationStack(path: $homeNavigationPath) {
+                           TemplateSelectionView(userDetails: UserDetails.SAMPLE_USER)
+                               .navigationDestination(for: String.self) { destination in
+                                   if destination == "TemplateSelectionView" {
+                                       TemplateSelectionView(userDetails: UserDetails.SAMPLE_USER)
+                                   }
+                               }
+                       }
+                       .tabItem { Label("Home", systemImage: "house") }
+                       .tag(0)
             
-                TemplateListView()
-                    .tabItem { Label("Home", systemImage: "house") }
-                SavedSignaturesView()
-                .tabItem { Label("Saved Signatures", systemImage: "list.bullet") }
+            DashboardView(refreshData: $refreshData)
+                .tabItem { Label("Dashboard", systemImage: "list.bullet") }
+                .tag(1)
+            
             ProfileView()
                 .tabItem { Label("My Account", systemImage: "person") }
-            
+                .tag(2)
         }
-        .tint(.green)
+        .onChange(of: selectedTab) { newTab in
+            if newTab == 0 {
+                            
+                            homeNavigationPath.removeLast(homeNavigationPath.count)
+                            homeNavigationPath.append("TemplateSelectionView") 
+                        }
+        }
+        .tint(Color("appFontColor"))
     }
 }
-
 #Preview {
     SignifyTabView()
 }

@@ -11,13 +11,17 @@ import Firebase
 @main
 struct SignifyApp: App {
     
+    @StateObject var viewModel = AuthViewModel()
+ 
+    
     init() {
         FirebaseApp.configure()
     }
     
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            LandingView()
+                .environmentObject(viewModel)
         }
     }
 }

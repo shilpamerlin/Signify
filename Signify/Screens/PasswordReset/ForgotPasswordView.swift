@@ -7,24 +7,24 @@
 
 import SwiftUI
 import FirebaseAuth
+import Foundation
 
 struct ForgotPasswordView: View {
-    @State private var email = ""
-    @State private var message: String = ""
-    @State private var isError: Bool = false
-    @State private var isEmailSent: Bool = false
+    
+    @StateObject private var viewModel = ForgotPasswordViewModel()
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $viewModel.navigationPath) {
             VStack(spacing: 20) {
                 HStack {
                     Image(systemName: "envelope")
                         .foregroundColor(Color("appFontColor"))
-                    InputTextField(text: $email, title: "Email")
+                    InputTextField(text: $viewModel.email, title: "Email")
                         .autocapitalization(.none)
-                        
+                    
                     Spacer()
-                        
+                    
                     
                 }
                 .padding()
@@ -43,40 +43,41 @@ struct ForgotPasswordView: View {
                         .padding()
                         .background(Color("appFontColor"))
                         .cornerRadius(8)
-                    if isEmailSent {
-                        Text("Password reset email sent successfully.")
-                            .foregroundColor(.green)
-                            .padding()
-                    }
-                    
-                    if isError {
-                        Text(message)
-                            .foregroundColor(.red)
-                            .padding()
-                    }
                 }
-               
+                
             }
             .padding()
+            .alert(viewModel.alertItem?.title ?? Text("Something went wrong.."), isPresented: $viewModel.isShowingAlert) {
+                
+            } message: {
+                viewModel.alertItem?.message
+            }
         }
+        
+        
+       
+        
+       
     }
     
     func sendPasswordReset() {
         
-        guard !email.isEmpty else {
-            self.message = "Please enter your email."
-            self.isError = true
-            return
+        if viewModel.email.isEmpty {
+            viewModel.isShowingAlert = true
+            viewModel.alertItem = AlertContext.emailNotEntered
         }
         
-        Auth.auth().sendPasswordReset(withEmail: email) { error in
+        Auth.auth().sendPasswordReset(withEmail: viewModel.email) { error in
             if let error = error {
-                self.message = error.localizedDescription
-                self.isError = true
+                viewModel.isShowingAlert = true
+                viewModel.alertItem = AlertContext.failedToResetPassword
             } else {
-                self.isEmailSent = true
-                self.isError = false
-                self.message = ""
+                viewModel.isShowingAlert = true
+                viewModel.alertItem = AlertContext.resetPasswordSucess
+                viewModel.email = ""
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                      dismiss()
+                }
             }
         }
     }

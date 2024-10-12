@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct DownloadButtonView: View {
+ 
+    var iconName: String
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Circle()
+                .fill(Color("appFontColor"))
+                .frame(width: 30, height: 30)
+            
+            Image(systemName: iconName)
+                .padding()
+                .foregroundColor(.white)
+        }
     }
 }
 
-#Preview {
-    DownloadButtonView()
-}

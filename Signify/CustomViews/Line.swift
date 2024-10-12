@@ -9,7 +9,9 @@ import SwiftUI
 
 struct Line: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Rectangle()
+            .frame(height: 1)
+            .foregroundColor(.gray)
     }
 }
 

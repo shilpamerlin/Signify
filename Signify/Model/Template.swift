@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+
+struct Template: Identifiable {
+    let id = UUID()
+    let name: String
+}
