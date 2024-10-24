@@ -81,8 +81,11 @@ struct UserInputFormView: View {
                         .opacity(isFormValid ? 1.0 : 0.5)
                         .cornerRadius(10)
                 }
+                
                 .padding()
+                
             }
+            
             .sheet(isPresented: $showImagePicker) {
                 
                 ImagePicker(selectedImage: $userDetails.profilePicture)
@@ -97,6 +100,8 @@ struct UserInputFormView: View {
         }
         .navigationTitle("User Information")
         .navigationBarTitleDisplayMode(.large) 
+        .navigationViewStyle(StackNavigationViewStyle())
+        
     }
 }
 extension UserInputFormView: AuthenticationFormProtocol {

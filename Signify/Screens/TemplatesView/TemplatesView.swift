@@ -580,13 +580,13 @@ struct RightbarTemplateView: View {
                     }
                 }
                 
-                Spacer()
-                
                 if let profileImage = userDetails.profilePicture {
                     Image(uiImage: profileImage)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
+                        .cornerRadius(5)
                         .frame(width: 60, height: 60)
+                        
                        
                 }
             }

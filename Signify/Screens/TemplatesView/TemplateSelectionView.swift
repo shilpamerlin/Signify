@@ -41,15 +41,13 @@ struct TemplateSelectionView: View {
     
     var body: some View {
         NavigationView {
-        ZStack {
-            Color("brandPrimary")
-                .ignoresSafeArea()
-        
-                
+            ZStack {
+                Color("brandPrimary")
+                    .ignoresSafeArea()
                 List {
-                   
+                    
                     ForEach(templates, id: \.name) { template in
-                        VStack(alignment: .leading)
+                        VStack()
                         {
                             Text(template.name)
                             
@@ -58,9 +56,6 @@ struct TemplateSelectionView: View {
                                 .foregroundStyle(.gray)
                                 .bold()
                                 .italic()
-                                .onAppear {
-                                                print("Rendering template: \(template.name)")
-                                            }
                             
                             switch template.name {
                             case "Classic":
@@ -110,6 +105,7 @@ struct TemplateSelectionView: View {
                             }
                         }
                         .padding(.vertical)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         
                     }
                 }
@@ -117,7 +113,7 @@ struct TemplateSelectionView: View {
                 
                 .background(Color("brandPrimary"))
                 .scrollContentBackground(.hidden)
-              
+                
                 .navigationDestination(isPresented: $navigateToForm) {
                     UserInputFormView(selectedTemplate: selectedTemplate)
                 }
@@ -135,5 +131,6 @@ struct TemplateSelectionView: View {
             
         }
         .navigationBarBackButtonHidden(true)
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }

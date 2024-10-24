@@ -21,11 +21,17 @@ struct LandingView: View {
                         .scaledToFit()
                         .frame(width: 150, height: 150)
                     
-                    
+                    HStack {
                     Text("Signify")
                         .font(.custom("Papyrus", size: 50))
                         .fontWeight(.bold)
                         .foregroundStyle(.black)
+                    Text("pro")
+                        .font(.custom("Papyrus", size: 25))
+                        .fontWeight(.regular)
+                        .foregroundStyle(.black)
+                        .baselineOffset(-30)
+                }
                     Text("Every signature holds significance")
                     
                         .font(.custom("Noteworthy", size: 15))
